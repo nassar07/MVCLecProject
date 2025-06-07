@@ -1,0 +1,45 @@
+﻿@using Day2Lab.ViewModel
+@model TraineeWithCourseAndResultViewModel
+@{
+    ViewData["Title"] = "GetResult";
+}
+
+<h1>GetResult</h1>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Trainee Name</th>
+        <th>Course Name</th>
+        <th>Degree</th>
+        <th>Status</th>
+        
+    </tr>
+
+
+
+    <tr>
+
+        <td>@Model.TraineeName</td>
+        <td>@Model.CourseName</td>
+        <td>@Model.Degree</td>
+        <td>
+			@if (Model.Degree >= 50)
+			{
+				<span class="badge bg-success">Success</span>
+			}
+			else
+			{
+				<span class="badge bg-danger">Fail</span>
+			}
+        </td>
+
+    </tr>
+
+
+
+
+
+
+
+
+</table>
