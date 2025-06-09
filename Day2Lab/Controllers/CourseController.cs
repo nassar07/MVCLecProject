@@ -1,21 +1,37 @@
 ﻿using Day2Lab.Models;
+using Day2Lab.Repository;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 
 namespace Day2Lab.Controllers
 {
     public class CourseController : Controller
     {
-        Context context = new Context();
+        //Context context = new Context();
+        ICourseRepository CourseRepository;
+        IDepartmentRepository DepartmentRepository;
+
+        public CourseController(ICourseRepository courseRepo , IDepartmentRepository deptRepo)
+        {
+            CourseRepository = courseRepo;
+            DepartmentRepository = deptRepo;
+        }
+
+
+
+
+
+
         public IActionResult Index()
         {
-            List<Course> courses = context.Courses.ToList();
+            List<Course> courses = CourseRepository.GetAll();
             return View("Index" , courses);
         }
 
 
         public IActionResult New()
         {
-            ViewBag.Depts = context.Departments.ToList();
+            ViewBag.Depts = DepartmentRepository.GetAll();
             return View("New");
         }
 
@@ -29,8 +45,11 @@ namespace Day2Lab.Controllers
             {
                 try
                 {
-                    context.Courses.Add(NewCourse);
-                    context.SaveChanges();
+                    //context.Courses.Add(NewCourse);
+                    CourseRepository.Add(NewCourse);
+
+                    //context.SaveChanges();
+                    CourseRepository.Save();
                     return RedirectToAction("Index");
 
                 }
@@ -39,8 +58,9 @@ namespace Day2Lab.Controllers
                     ModelState.AddModelError("Name", ex.InnerException.Message);
                 }
             }
-                ViewBag.Depts = context.Departments.ToList();
-                return View("New", NewCourse);
+                //ViewBag.Depts = context.Departments.ToList();
+                ViewBag.Depts = DepartmentRepository.GetAll();
+            return View("New", NewCourse);
 
         }
 
