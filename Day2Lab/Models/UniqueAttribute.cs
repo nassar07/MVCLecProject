@@ -7,20 +7,26 @@ namespace Day2Lab.Models
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            Course CourseFromReq = (Course)validationContext.ObjectInstance;
+            var context = (Context)validationContext.GetService(typeof(Context));
 
-            string name = value.ToString();
+            if (context == null)
+            {
+                throw new InvalidOperationException("Database context is not available");
+            }
 
-            Context context = new Context();
+            Course courseFromReq = (Course)validationContext.ObjectInstance;
+            string name = value?.ToString();
 
-            Course CourseFromDb = context.Courses.FirstOrDefault(c => c.Name == name && c.DeptId == CourseFromReq.DeptId);
+            var courseFromDb = context.Courses.FirstOrDefault(
+                c => c.Name == name && c.DeptId == courseFromReq.DeptId);
 
-            if (CourseFromDb == null)
+            if (courseFromDb == null)
             {
                 return ValidationResult.Success;
             }
-            
+
             return new ValidationResult("This Course already exists in this Department");
         }
     }
+
 }

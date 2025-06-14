@@ -5,9 +5,9 @@ namespace Day2Lab.Repository
     public class DepartmentRepository : IDepartmentRepository
     {
         Context context;
-        public DepartmentRepository()
+        public DepartmentRepository(Context _context)
         {
-            context = new Context();
+            context = _context;
         }
         public void Add(Department entity)
         {

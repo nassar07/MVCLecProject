@@ -5,9 +5,9 @@ namespace Day2Lab.Repository
     public class InstructorRepository : IInstructorRepository
     {
         Context context;
-        public InstructorRepository()
+        public InstructorRepository(Context _context)
         {
-            context = new Context();
+            context = _context;
         }
         public void Add(Instructor entity)
         {

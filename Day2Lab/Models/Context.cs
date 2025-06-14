@@ -11,17 +11,21 @@ namespace Day2Lab.Models
         public DbSet<CrsResult> CrsResults { get; set; }
 
 
-        public Context() : base()
+        //public Context() : base()
+        //{
+
+        //}
+
+        public Context(DbContextOptions<Context> options):base(options)
         {
 
         }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MVC_DB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MVC_DB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
 
     }

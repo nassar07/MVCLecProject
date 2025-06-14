@@ -2,9 +2,18 @@
 {
     public class InstructoreBL
     {
+        Context context;
+
+        public InstructoreBL()
+        {
+        }
+
+        public InstructoreBL(Context _context)
+        {
+            context = _context;
+        }
         public Instructor GetByID(int id)
         {
-            Context context = new Context();
             return context.Instructores.FirstOrDefault(i=>i.Id==id);
         }
     }

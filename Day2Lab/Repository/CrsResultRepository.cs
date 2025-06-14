@@ -6,9 +6,9 @@ namespace Day2Lab.Repository
     {
         Context context;
 
-        public CrsResultRepository()
+        public CrsResultRepository(Context _context)
         {
-            context = new Context();
+            context = _context;
         }
         public void Add(CrsResult entity)
         {

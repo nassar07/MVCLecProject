@@ -1,4 +1,7 @@
+using Day2Lab.Models;
 using Day2Lab.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Day2Lab
 {
@@ -18,6 +21,12 @@ namespace Day2Lab
             });
             //------
 
+            // DbContext Connection From AppSettings
+
+            builder.Services.AddDbContext<Context>(optionsBuilder =>
+            {
+                optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("cslocal"));
+            });
 
 
 

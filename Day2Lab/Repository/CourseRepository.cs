@@ -5,9 +5,9 @@ namespace Day2Lab.Repository
     public class CourseRepository : ICourseRepository
     {
         Context context;
-        public CourseRepository()
+        public CourseRepository(Context _context)
         {
-            context = new Context();
+            context = _context ;
         }
 
         public void Add(Course entity)
